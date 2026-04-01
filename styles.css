@@ -142,6 +142,11 @@ body {
     overflow-wrap: break-word;
 }
 
+#task-list li.completed span {
+    text-decoration: 2px line-through black;
+    color: black;
+}
+
 .task-buttons {
     display: flex;
     flex-direction: row;
@@ -177,4 +182,24 @@ body {
 
 .task-buttons .delete-btn {
     background-color: orange;
+}
+
+@media (max-width: 600px) {
+    .container {
+        margin: 0 20px;
+        padding: 0 1;
+    }
+
+    .todo-app {
+        padding: 1.5rem;
+        gap: 20px;
+    }
+
+    .input-area input {
+        font-size: 1rem;
+    }
+
+    #task-list li {
+        font-size: 1rem;
+    }
 }

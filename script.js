@@ -18,6 +18,20 @@ document.addEventListener('DOMContentLoaded', () => {
         todosContainer.style.width = taskList.children.length > 0 ? '100%' : '50%';
     }
 
+    const saveTaskToLocalStorage = () => {
+        const tasks = Array.from(taskList.querySelectorAll('li')).map(li => ({
+            text: li.querySelector('span').textContent,
+            completed: li.querySelector('.checkbox').checked
+        }))
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+    }
+
+    const loadTasksFromLocalStorage = () => {
+        const savedTasks = JSON.parse(localStorage.getItem('tasks')) || [];
+        savedTasks.forEach(({ text, completed }) => addTask(text, completed, false));
+        toggleEmptyState();
+    }
+
     const addTask = (text, completed = false) => {
         const taskText = text || taskInput.value.trim();
         if (!taskText) {
@@ -50,6 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
             editBtn.disabled = isChecked;
             editBtn.style.opacity = isChecked ? '0.5' : '1';
             editBtn.style.pointerEvents = isChecked ? 'none' : 'auto';
+            saveTaskToLocalStorage();
         })
 
         editBtn.addEventListener('click', () => {
@@ -58,6 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     ('span').textContent;
                 li.remove();
                 toggleEmptyState();
+                saveTaskToLocalStorage();
             };
         });
 
@@ -65,11 +81,13 @@ document.addEventListener('DOMContentLoaded', () => {
             addEventListener('click', () => {
                 li.remove();
                 toggleEmptyState();
+                saveTaskToLocalStorage();
             });
 
         taskList.appendChild(li);
         taskInput.value = '';
         toggleEmptyState();
+        saveTaskToLocalStorage();
     };
 
     addTaskBtn.addEventListener('click', () =>
@@ -80,5 +98,10 @@ document.addEventListener('DOMContentLoaded', () => {
             addTask();
         };
     });
+
+
+    loadTasksFromLocalStorage();
+
+
 });
 
