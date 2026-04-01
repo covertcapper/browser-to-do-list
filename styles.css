@@ -1,3 +1,16 @@
+:root {
+    --mainBgColour: linear-gradient(135deg, #ffc695 0.000%, #636676 50.000%, #001426 100.000%);
+    --elementBgColour: #454a65d7;
+    --liBgColour: rgba(93, 114, 146, 0.497);
+    --placeHolderTextColour: #bcbcbc;
+    --headerFontFamily: "Recursive", sans-serif;
+    --liFontFamily: 'Patrick Hand', sans-serif;
+    --textColour: #fff;
+    --boxShadow: 0 0 100px rgba(0, 0, 0, 0.5);
+    --liBoxShadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    --boxBorders: 3px solid rgba(255, 255, 255, 0.18);
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -6,7 +19,7 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color: rgb(93, 37, 37);
+    background: var(--mainBgColour);
 }
 
 .container {
@@ -27,15 +40,18 @@ body {
     align-items: center;
     flex-direction: column;
     gap: 30px;
-    color: #fff;
+    color: var(--textColour);
     border-radius: 20px;
-    box-shadow: 0 0 100px rgba(0, 0, 0, 0.5);
-    border: 3px solid rgba(255, 255, 255, 0.18);
-    backdrop-filter: blur(10px);
+    box-shadow: var(--boxShadow);
+    border: var(--boxBorders);
+    backdrop-filter: blur(30px);
 }
 
 .todo-app h1 {
-    font-size: 2rem;
+    font-size: 2.5rem;
+    font-family: var(--headerFontFamily);
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
 }
 
 .input-area {
@@ -52,12 +68,12 @@ body {
     border: none;
     outline: none;
     border-radius: 22px;
-    background-color: rgba(255, 194, 209, 0.3);
-    color: #dbdbdb;
+    background-color: var(--elementBgColour);
+    color: var(--textColour);
 }
 
 .input-area input::placeholder {
-    color: #bcbcbc;
+    color: var(--placeHolderTextColour);
 }
 
 .input-area button {
@@ -67,22 +83,23 @@ body {
     margin-left: 10px;
     padding: 8px;
     border-radius: 50%;
-    color: #fff;
-    font-size: 1.1rem;
-    background-color: rgba(255, 194, 209, 0.3);
-    border: 2px solid rgba(255, 255, 255, 0.18);
+    color: white;
+    font-size: 1.4rem;
+    background-color: var(--elementBgColour);
+    border: var(--boxBorders);
     cursor: pointer;
     transition: all 0.2s ease;
 }
 
 .input-area button:hover {
+    background-color: #515778;
     transform: scale(1.1);
-    background: #ff6f91;
 }
 
 .todos-container {
     width: 100%;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
 }
@@ -94,22 +111,27 @@ body {
 }
 
 #task-list li {
+    font-family: var(--liFontFamily);
+    letter-spacing: 0.1rem;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: rgba(255, 194, 209, 0.3);
+    background-color: var(--liBgColour);
     margin-bottom: 10px;
     padding: 8px 10px;
     border-radius: 30px;
     font-size: 1.2rem;
-    color: #fff;
+    color: var(--textColour);
     position: relative;
-    transition: box-shadow 0.2s ease;
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
 #task-list li:hover {
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--liBoxShadow);
+    transform: translateY(-1px);
 }
 
 #task-list li .checkbox {
@@ -124,7 +146,7 @@ body {
 }
 
 #task-list li .checkbox:checked {
-    background-color: #ff6f91;
+    background-color: var(--elementBgColour);
     transform: scale(1.1);
 }
 
@@ -137,25 +159,24 @@ body {
 }
 
 #task-list li span {
-    width: 90%;
+    flex: 1;
+    min-width: 0;
     margin-left: 10px;
     overflow-wrap: break-word;
 }
 
 #task-list li.completed span {
-    text-decoration: 2px line-through black;
-    color: black;
+    text-decoration: 2px line-through var(--placeHolderTextColour);
+    color: var(--placeHolderTextColour);
 }
 
 .task-buttons {
     display: flex;
-    flex-direction: row;
+    flex-shrink: 0;
     gap: 10px;
-    margin-right: auto;
 }
 
 .task-buttons button {
-    background-color: rgba(255, 194, 209, 0.3);
     border: none;
     border-radius: 50%;
     width: 30px;
@@ -177,11 +198,19 @@ body {
 }
 
 .task-buttons .edit-btn {
-    background-color: orangered;
+    background-color: #6c879f;
 }
 
 .task-buttons .delete-btn {
-    background-color: orange;
+    background-color: #31304b;
+}
+
+.todos-container p {
+    font-family: var(--headerFontFamily);
+    font-size: 1.5rem;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
 }
 
 @media (max-width: 600px) {

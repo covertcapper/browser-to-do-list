@@ -7,13 +7,13 @@ document.addEventListener('DOMContentLoaded', () => {
         ('add-task-btn');
     const taskList = document.getElementById
         ('task-list');
-    const emptyImage = document.querySelector
-        ('.empty-image');
+    const completedMessage = document.querySelector
+        ('.completed-message');
     const todosContainer = document.querySelector
         ('.todos-container');
 
     const toggleEmptyState = () => {
-        emptyImage.style.display = taskList.children
+        completedMessage.style.display = taskList.children
             .length === 0 ? 'block' : 'none';
         todosContainer.style.width = taskList.children.length > 0 ? '100%' : '50%';
     }
@@ -43,8 +43,8 @@ document.addEventListener('DOMContentLoaded', () => {
         <input type="checkbox" class="checkbox" ${completed ? 'checked' : ''} />
         <span>${taskText}</span>
         <div class ="task-buttons">
-            <button class="edit-btn">✏️</button>
-            <button class="delete-btn">🚮</button>
+            <button class="edit-btn"><i class="fa-solid fa-pencil"></i></button>
+            <button class="delete-btn"><i class="fa-solid fa-trash-can"></i></button>
         </div>
         `;
 
